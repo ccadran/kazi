@@ -1,15 +1,12 @@
 <script setup lang="ts">
 const supabase = useSupabaseClient();
-
-const fecthData = async () => {
-  const data = await supabase.from("categories").select("*");
-  console.log(data.data);
+import type { Category } from "~/server/types/api";
+const useCategories = async () => {
+  const { data, error } = await useFetch<Category[]>("/api/categories");
+  console.log(data.value.categories);
 };
-onMounted(() => {
-  fecthData();
-});
+useCategories();
 </script>
-
 <template>
   <div>
     <NuxtRouteAnnouncer />
