@@ -6,7 +6,7 @@ const categories = ref<Category[]>([]);
 
 const { data, error } = await useFetch<Category[]>("/api/categories");
 categories.value = data.value;
-console.log(categories.value, "test ref");
+console.log(categories.value[0].id, "test ref");
 </script>
 
 <template>
