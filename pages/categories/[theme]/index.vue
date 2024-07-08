@@ -6,6 +6,7 @@ const category = ref<Category[]>([]);
 
 const route = useRoute();
 const categoryId = route.params.theme as string;
+console.log(route.params);
 
 const { data, error } = await useFetch<Category[]>(
   `/api/categories/${categoryId}`
@@ -16,9 +17,10 @@ category.value = data.value[0];
 const subThemes = ref<Subtheme[]>([]);
 
 const { data: dataSubthemes } = await useFetch<Category[]>(
-  `/api/subthemes/${categoryId}`
+  `/api/subthemes/category-${categoryId}`
 );
 subThemes.value = dataSubthemes.value;
+console.log(subThemes.value);
 </script>
 
 <template>
