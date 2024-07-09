@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@nuxtjs/supabase": "^1.2.2",
+    "@pinia/nuxt": "^0.5.1",
     "@supabase/supabase-js": "^2.44.2",
     "nuxt": "^3.12.2",
+    "pinia": "^2.1.7",
     "vue": "latest"
   }
 }

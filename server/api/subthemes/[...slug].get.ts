@@ -3,7 +3,7 @@ import { createError } from "h3";
 
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient(event);
-  const slug = event.context.params.slug;
+  const slug = event.context?.params!.slug;
 
   // Vérifiez le type de route
   if (slug.startsWith("category-")) {
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
   }
 });
 
-async function handleCategoryRoute(client, categoryId) {
+async function handleCategoryRoute(client, categoryId: string) {
   try {
     const { data, error } = await client
       .from("subthemes")
@@ -40,26 +40,35 @@ async function handleCategoryRoute(client, categoryId) {
   }
 }
 
-async function handleSimpleId(client, id) {
-  try {
-    const { data, error } = await client
-      .from("subthemes")
-      .select("*")
-      .eq("id", id);
+async function handleSimpleId(client, id: string) {
+  const { data: subtheme, error: subthemeError } = await client
+    .from("subthemes")
+    .select("*")
+    .eq("id", id)
+    .single();
 
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    console.error("Error fetching subtheme by UUID:", error);
+  if (subthemeError)
+    throw createError({
+      statusCode: 404,
+      statusMessage: "Sous-thème non trouvé",
+    });
+
+  const { data: quiz, error: quizzesError } = await client
+    .from("quizzes")
+    .select("*")
+    .eq("subtheme_id", id);
+
+  if (quizzesError)
     throw createError({
       statusCode: 500,
-      statusMessage: "Erreur lors de la récupération du subtheme par UUID",
+      statusMessage: "Erreur lors de la récupération des quiz",
     });
-  }
+
+  return { subtheme, quiz };
 }
 
 // Fonction pour vérifier si une chaîne est un UUID valide
-function isUUID(str) {
+function isUUID(str: string) {
   const uuidRegex =
     /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   return uuidRegex.test(str);

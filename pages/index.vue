@@ -6,7 +6,6 @@ const categories = ref<Category[]>([]);
 
 const { data, error } = await useFetch<Category[]>("/api/categories");
 categories.value = data.value;
-console.log(categories.value[0].id, "test ref");
 </script>
 
 <template>
@@ -15,6 +14,7 @@ console.log(categories.value[0].id, "test ref");
     <h1>{{ category.title }}</h1>
     <NuxtLink :to="`/categories/${category.id}`">Voir les sous-thèmes</NuxtLink>
   </div>
+  <NuxtLink :to="'/categories'">Voir l'ensemble des catégories</NuxtLink>
 </template>
 
 <style lang="scss"></style>
