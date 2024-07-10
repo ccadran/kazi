@@ -5,7 +5,7 @@ import type { Quiz } from "~/server/types/api";
 export const useQuizStore = defineStore("quiz", () => {
   const quiz = ref<Quiz | null>(null);
 
-  function setQuiz(value: Quiz) {
+  function setQuiz(value: Quiz, title: string) {
     quiz.value = value;
   }
 
