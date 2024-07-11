@@ -14,7 +14,11 @@ const subthemeContent = ref<Subtheme>(data.value.subtheme);
 // console.log(subthemeContent.value, "test");
 
 const quiz = ref<Quiz[]>(data.value.quiz[0]);
+console.log(quiz.value, "quiz");
+
 quizStore.setQuiz(quiz.value);
+console.log(quizStore.quiz, "quizStore");
+
 // console.log(quizStore.quiz, "quizStore");
 
 // console.log(quiz.value, "quiz");

@@ -11,7 +11,6 @@ const quizScore = ref<number>(0);
 const isValidate = ref(false);
 const isQuizEnded = ref(false);
 console.log(quiz.value, "quiz");
-console.log(quiz.value.quiz_content.length);
 
 const checkAnswer = (answer: QuizAnswer) => {
   if (!isValidate.value) {
@@ -75,3 +74,16 @@ const nextQuestion = () => {
 </template>
 
 <style lang="scss"></style>
+
+<!-- <script lang="ts" setup>
+import { useQuizStore } from "~/stores/quiz";
+
+const quizStore = useQuizStore();
+console.log(quizStore.quiz, "quizStore");
+</script>
+
+<template>
+  <div></div>
+</template>
+
+<style lang="scss"></style> -->

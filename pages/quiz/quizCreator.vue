@@ -7,7 +7,10 @@ const quizStore = useQuizStore();
 const categories = ref<Category[]>([]);
 const subthemes = ref<SubTheme[]>([]);
 const quizzes = ref<Quiz[]>([]);
-const quizPersonalized = ref([]);
+const quizPersonalized = ref<{ quiz_content: Quiz[] }>({
+  quiz_content: [],
+});
+console.log(quizPersonalized.value.quiz_content, "quizPersonalized");
 
 const { data: categoriesData, error: categoriesError } = await useFetch<
   Category[]
@@ -25,7 +28,8 @@ const { data: quizzesData, error: quizzesError } = await useFetch<Category[]>(
   "/api/quiz"
 );
 quizzes.value = quizzesData.value;
-watch(quizPersonalized, (value) => {
+
+watch(quizPersonalized.value, (value) => {
   console.log(value, "quizPersonalized");
   quizStore.setQuiz(value);
   console.log(quizStore.quiz, "quizStore");
@@ -33,6 +37,7 @@ watch(quizPersonalized, (value) => {
 const subthemesWithQuizzes = computed(() => {
   return subthemes.value.map((subtheme) => ({
     ...subtheme,
+
     quiz_content: quizzes.value
       .filter((quiz) => quiz.subtheme_id === subtheme.id)
       .map((quiz) => quiz.quiz_content)
@@ -55,30 +60,35 @@ const addQuizContent = (theme) => {
   if (Array.isArray(theme)) {
     theme.forEach((subtheme) => {
       if (!subtheme.isContentAdded && subtheme.quiz_content.length > 0) {
-        subtheme.quiz_content.forEach((quiz) => {
-          quizPersonalized.value = [...quizPersonalized.value, quiz];
+        subtheme.quiz_content.forEach((quizContent) => {
+          if (!quizPersonalized.value.quiz_content.includes(quizContent)) {
+            quizPersonalized.value.quiz_content.push(quizContent);
+          }
         });
         subtheme.isContentAdded = true; // Marque comme ajouté
       } else if (subtheme.isContentAdded) {
-        subtheme.quiz_content.forEach((quiz) => {
-          quizPersonalized.value = quizPersonalized.value.filter(
-            (q) => q.id !== quiz.id
-          );
+        subtheme.quiz_content.forEach((quizContent) => {
+          quizPersonalized.value.quiz_content =
+            quizPersonalized.value.quiz_content.filter(
+              (q) => q !== quizContent
+            );
         });
         subtheme.isContentAdded = false; // Marque comme retiré
       }
     });
   } else {
     if (!theme.isContentAdded) {
-      theme.quiz_content.forEach((quiz) => {
-        quizPersonalized.value = [...quizPersonalized.value, quiz];
+      theme.quiz_content.forEach((quizContent) => {
+        if (!quizPersonalized.value.quiz_content.includes(quizContent)) {
+          quizPersonalized.value.quiz_content.push(quizContent);
+          console.log(quizPersonalized.value, "quizPersonalized");
+        }
       });
-      theme.isContentAdded = true;
+      theme.isContentAdded = true; // Marque comme ajouté
     } else {
-      theme.quiz_content.forEach((quiz) => {
-        quizPersonalized.value = quizPersonalized.value.filter(
-          (q) => q.id !== quiz.id
-        );
+      theme.quiz_content.forEach((quizContent) => {
+        quizPersonalized.value.quiz_content =
+          quizPersonalized.value.quiz_content.filter((q) => q !== quizContent);
       });
       theme.isContentAdded = false; // Marque comme retiré
     }
@@ -103,6 +113,7 @@ const addQuizContent = (theme) => {
         </li>
       </ul>
     </div>
+    <NuxtLink :to="'/quiz'">Démarrer le quiz</NuxtLink>
   </div>
 </template>
 
