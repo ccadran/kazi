@@ -7,6 +7,7 @@ const quizStore = useQuizStore();
 const categories = ref<Category[]>([]);
 const subthemes = ref<SubTheme[]>([]);
 const quizzes = ref<Quiz[]>([]);
+const quizPersonalized = ref([]);
 
 const { data: categoriesData, error: categoriesError } = await useFetch<
   Category[]
@@ -24,8 +25,11 @@ const { data: quizzesData, error: quizzesError } = await useFetch<Category[]>(
   "/api/quiz"
 );
 quizzes.value = quizzesData.value;
-// console.log(quizzes.value, "quizzes");
-
+watch(quizPersonalized, (value) => {
+  console.log(value, "quizPersonalized");
+  quizStore.setQuiz(value);
+  console.log(quizStore.quiz, "quizStore");
+});
 const subthemesWithQuizzes = computed(() => {
   return subthemes.value.map((subtheme) => ({
     ...subtheme,
@@ -33,9 +37,9 @@ const subthemesWithQuizzes = computed(() => {
       .filter((quiz) => quiz.subtheme_id === subtheme.id)
       .map((quiz) => quiz.quiz_content)
       .flat(),
+    isContentAdded: false,
   }));
 });
-// console.log(subthemesWithQuizzes.value, "subthemes filtered");
 
 const categoriesWithSubthemes = computed(() => {
   return categories.value.map((category) => ({
@@ -43,22 +47,41 @@ const categoriesWithSubthemes = computed(() => {
     subthemes: subthemesWithQuizzes.value.filter(
       (subtheme) => subtheme.category_id === category.id
     ),
+    isContentAdded: false,
   }));
 });
 
-console.log(categoriesWithSubthemes.value, "categoriesWithSubthemes");
-
 const addQuizContent = (theme) => {
   if (Array.isArray(theme)) {
-    console.log(theme, "theme");
-
     theme.forEach((subtheme) => {
-      if (subtheme.quiz_content.length > 0) {
-        console.log(subtheme.quiz_content, "subthemeQuizContent");
+      if (!subtheme.isContentAdded && subtheme.quiz_content.length > 0) {
+        subtheme.quiz_content.forEach((quiz) => {
+          quizPersonalized.value = [...quizPersonalized.value, quiz];
+        });
+        subtheme.isContentAdded = true; // Marque comme ajouté
+      } else if (subtheme.isContentAdded) {
+        subtheme.quiz_content.forEach((quiz) => {
+          quizPersonalized.value = quizPersonalized.value.filter(
+            (q) => q.id !== quiz.id
+          );
+        });
+        subtheme.isContentAdded = false; // Marque comme retiré
       }
     });
   } else {
-    console.log(theme.quiz_content, "quizContent");
+    if (!theme.isContentAdded) {
+      theme.quiz_content.forEach((quiz) => {
+        quizPersonalized.value = [...quizPersonalized.value, quiz];
+      });
+      theme.isContentAdded = true;
+    } else {
+      theme.quiz_content.forEach((quiz) => {
+        quizPersonalized.value = quizPersonalized.value.filter(
+          (q) => q.id !== quiz.id
+        );
+      });
+      theme.isContentAdded = false; // Marque comme retiré
+    }
   }
 };
 </script>
