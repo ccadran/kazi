@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { Category } from "~/server/types/api";
 
-const supabase = useSupabaseClient();
 const categories = ref<Category[]>([]);
 
 const { data, error } = await useFetch<Category[]>("/api/categories");

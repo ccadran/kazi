@@ -4,12 +4,10 @@ export default eventHandler(async (event) => {
   try {
     const client = await serverSupabaseClient(event);
 
-    const categoryId = event.context!.params!.id;
+    // const categoryId = event.context!.params!.id;
 
-    const { data, error } = await client
-      .from("subthemes")
-      .select("*")
-      .eq("category_id", categoryId);
+    const { data, error } = await client.from("subthemes").select("*");
+    // .eq("category_id", categoryId);
 
     if (error) throw error;
 
