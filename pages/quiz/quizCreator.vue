@@ -3,6 +3,7 @@ import type { Category, SubTheme, Quiz } from "~/server/types/api";
 import { useQuizStore } from "~/stores/quiz";
 
 const quizStore = useQuizStore();
+console.log(quizStore);
 
 const categories = ref<Category[]>([]);
 const subthemes = ref<SubTheme[]>([]);
@@ -10,6 +11,7 @@ const quizzes = ref<Quiz[]>([]);
 const quizPersonalized = ref<{ quiz_content: Quiz[] }>({
   quiz_content: [],
 });
+const maxQuestions = ref(2);
 console.log(quizPersonalized.value.quiz_content, "quizPersonalized");
 
 const { data: categoriesData, error: categoriesError } = await useFetch<
@@ -32,7 +34,10 @@ quizzes.value = quizzesData.value;
 watch(quizPersonalized.value, (value) => {
   console.log(value, "quizPersonalized");
   quizStore.setQuiz(value);
-  console.log(quizStore.quiz, "quizStore");
+  quizStore.setMaxQuestions(maxQuestions.value);
+  console.log(quizStore.maxQuestions, "quizStore max");
+
+  // console.log(quizStore.quiz, "quizStore");
 });
 const subthemesWithQuizzes = computed(() => {
   return subthemes.value.map((subtheme) => ({
@@ -99,6 +104,7 @@ const addQuizContent = (theme) => {
 <template>
   <div>
     <h1>Quiz creator</h1>
+    <h2>Themes</h2>
     <div v-for="category in categoriesWithSubthemes">
       <h2 @click="addQuizContent(category.subthemes)">
         {{ category.title }}
@@ -113,7 +119,16 @@ const addQuizContent = (theme) => {
         </li>
       </ul>
     </div>
-    <NuxtLink :to="'/quiz'">Démarrer le quiz</NuxtLink>
+    <h2>Questions</h2>
+    <!-- <h2>Nombre maximum de questions</h2>
+    <input
+      type="number"
+      v-model="maxQuestions"
+      min="1"
+      @input="quizStore.setMaxQuestions(maxQuestions)"
+    /> -->
+
+    <NuxtLink :to="'/quiz/game'">Démarrer le quiz</NuxtLink>
   </div>
 </template>
 

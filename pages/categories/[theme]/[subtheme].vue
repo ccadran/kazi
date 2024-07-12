@@ -27,7 +27,7 @@ console.log(quizStore.quiz, "quizStore");
 <template>
   <div>page d'un sous thème</div>
   <h1>{{ subthemeContent.title }}</h1>
-  <NuxtLink :to="'/quiz'">lancer le quiz</NuxtLink>
+  <NuxtLink :to="'/quiz/game'">lancer le quiz</NuxtLink>
 </template>
 
 <style lang="scss"></style>

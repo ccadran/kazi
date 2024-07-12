@@ -21,7 +21,7 @@ export interface Subtheme {
 export interface Quiz {
   id: number;
   subtheme_id: number;
-  content: {
+  quiz_content: {
     question: string;
     answers: {
       answer: string;
