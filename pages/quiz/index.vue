@@ -38,13 +38,20 @@ const nextQuestion = () => {
     isValidate.value = false;
   }
 };
+
+// const percentageResult = () => {
+//   return (quizScore.value / quiz.value.quiz_content.length) * 100;
+// };
+const percentageResult = computed(
+  () => (quizScore.value / quiz.value.quiz_content.length) * 100
+);
 </script>
 
 <template>
   <div>ma page de quiz</div>
   <h1>{{ quiz.title }}</h1>
 
-  <h2 v-if="currentIndex < quiz.quiz_content.length - 1">
+  <h2 v-if="currentIndex <= quiz.quiz_content.length - 1">
     {{ quiz.quiz_content[currentIndex].question }}
   </h2>
   <div v-if="!isQuizEnded">
@@ -69,21 +76,8 @@ const nextQuestion = () => {
   </div>
   <div v-else>
     <h2>Quiz terminé</h2>
-    <p>{{ quizScore }} / {{ quiz.quiz_content.length }}</p>
+    <p>{{ percentageResult }} %</p>
   </div>
 </template>
 
 <style lang="scss"></style>
-
-<!-- <script lang="ts" setup>
-import { useQuizStore } from "~/stores/quiz";
-
-const quizStore = useQuizStore();
-console.log(quizStore.quiz, "quizStore");
-</script>
-
-<template>
-  <div></div>
-</template>
-
-<style lang="scss"></style> -->
