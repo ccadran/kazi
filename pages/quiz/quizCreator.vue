@@ -120,13 +120,13 @@ const addQuizContent = (theme) => {
       </ul>
     </div>
     <h2>Questions</h2>
-    <!-- <h2>Nombre maximum de questions</h2>
+    <h2>Nombre maximum de questions</h2>
     <input
       type="number"
-      v-model="maxQuestions"
+      v-model.number="maxQuestions"
       min="1"
       @input="quizStore.setMaxQuestions(maxQuestions)"
-    /> -->
+    />
 
     <NuxtLink :to="'/quiz/game'">Démarrer le quiz</NuxtLink>
   </div>
