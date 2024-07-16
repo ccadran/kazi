@@ -4,8 +4,8 @@ import type { Quiz } from "~/server/types/api";
 type QuizAnswer = Quiz["content"]["answers"];
 
 const quizStore = useQuizStore();
-const quiz = ref<Quiz>(quizStore.fullQuiz);
-const quizContent = ref<Quiz>(quizStore.quizContent);
+const quiz = computed<Quiz | null>(() => quizStore.fullQuiz);
+const quizContent = computed(() => quizStore.quizContent);
 
 const currentIndex = ref<number>(0);
 const currentAnswer = ref(null);

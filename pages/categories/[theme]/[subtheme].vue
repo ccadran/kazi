@@ -5,23 +5,17 @@ import { useQuizStore } from "~/stores/quiz";
 const route = useRoute();
 const subthemeId = route.params.subtheme as string;
 const quizStore = useQuizStore();
-// console.log(route.params);
 
 const { data } = await useFetch<{ subtheme: Subtheme; quiz: Quiz }>(
   `/api/subthemes/${subthemeId}`
 );
-const subthemeContent = ref<Subtheme>(data.value.subtheme);
-// console.log(subthemeContent.value, "test");
+const subthemeContent = ref<Subtheme>(data.value!.subtheme);
 
 const quiz = ref<Quiz[]>(data.value.quiz[0]);
 console.log(quiz.value, "quiz");
 
 quizStore.setQuiz(quiz.value);
-console.log(quizStore.quiz, "quizStore");
-
-// console.log(quizStore.quiz, "quizStore");
-
-// console.log(quiz.value, "quiz");
+console.log(quizStore.fullQuiz, "quizStore");
 </script>
 
 <template>

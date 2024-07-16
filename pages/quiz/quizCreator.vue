@@ -16,7 +16,7 @@ const quizzes = ref<Quiz[]>([]);
 const quizPersonalized = ref<QuizPersonalized>({
   quiz_content: [],
 });
-const maxQuestions = ref<number>(0);
+const maxQuestions = ref<number>(2);
 // console.log(quizPersonalized.value.quiz_content, "quizPersonalized");
 console.log(quizPersonalized.value, "quizPersonalized");
 const { data: categoriesData, error: categoriesError } = await useFetch<
