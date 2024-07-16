@@ -1,35 +1,40 @@
 <script lang="ts" setup>
-import type { Category, SubTheme, Quiz } from "~/server/types/api";
+import type {
+  Category,
+  Subtheme,
+  Quiz,
+  QuizPersonalized,
+} from "~/server/types/api";
 import { useQuizStore } from "~/stores/quiz";
 
 const quizStore = useQuizStore();
 console.log(quizStore);
 
 const categories = ref<Category[]>([]);
-const subthemes = ref<SubTheme[]>([]);
+const subthemes = ref<Subtheme[]>([]);
 const quizzes = ref<Quiz[]>([]);
-const quizPersonalized = ref<{ quiz_content: Quiz[] }>({
+const quizPersonalized = ref<QuizPersonalized>({
   quiz_content: [],
 });
-const maxQuestions = ref(2);
-console.log(quizPersonalized.value.quiz_content, "quizPersonalized");
-
+const maxQuestions = ref<number>(0);
+// console.log(quizPersonalized.value.quiz_content, "quizPersonalized");
+console.log(quizPersonalized.value, "quizPersonalized");
 const { data: categoriesData, error: categoriesError } = await useFetch<
   Category[]
 >("/api/categories");
-categories.value = categoriesData.value;
+categories.value = categoriesData.value!;
 // console.log(categories.value, "categories");
 
 const { data: subthemesData, error: subthemesError } = await useFetch<
-  Category[]
+  Subtheme[]
 >("/api/subthemes");
-subthemes.value = subthemesData.value;
+subthemes.value = subthemesData.value!;
 // console.log(subthemes.value, "subthemes");
 
-const { data: quizzesData, error: quizzesError } = await useFetch<Category[]>(
+const { data: quizzesData, error: quizzesError } = await useFetch<Quiz[]>(
   "/api/quiz"
 );
-quizzes.value = quizzesData.value;
+quizzes.value = quizzesData.value!;
 
 watch(quizPersonalized.value, (value) => {
   console.log(value, "quizPersonalized");
@@ -61,7 +66,7 @@ const categoriesWithSubthemes = computed(() => {
   }));
 });
 
-const addQuizContent = (theme) => {
+const addQuizContent = (theme: any) => {
   if (Array.isArray(theme)) {
     theme.forEach((subtheme) => {
       if (!subtheme.isContentAdded && subtheme.quiz_content.length > 0) {
@@ -127,6 +132,12 @@ const addQuizContent = (theme) => {
       min="1"
       @input="quizStore.setMaxQuestions(maxQuestions)"
     />
+    <p @click="quizStore.setMaxQuestions(5)">5</p>
+    <p @click="quizStore.setMaxQuestions(10)">10</p>
+    <p @click="quizStore.setMaxQuestions(15)">15</p>
+    <p @click="quizStore.setMaxQuestions(20)">20</p>
+    <p @click="quizStore.setMaxQuestions(25)">25</p>
+    <p @click="quizStore.setMaxQuestions()">max</p>
 
     <NuxtLink :to="'/quiz/game'">Démarrer le quiz</NuxtLink>
   </div>

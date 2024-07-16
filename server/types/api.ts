@@ -30,6 +30,30 @@ export interface Quiz {
     explication: string;
   };
 }
+// export interface QuizPersonalized {
+//   quiz_content: {
+//     quiz_content: {
+//       question: string;
+//       answers: {
+//         answer: string;
+//         isCorrect: boolean;
+//       };
+//       explication: string;
+//     };
+//   };
+// }
+export interface QuizPersonalized {
+  quiz_content: {
+    quiz_content: {
+      question: string;
+      answers: {
+        answer: string;
+        isCorrect: boolean;
+      }[];
+      explication: string;
+    };
+  }[];
+}
 
 export interface User {
   id: number;
