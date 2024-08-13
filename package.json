@@ -16,5 +16,8 @@
     "nuxt": "^3.12.2",
     "pinia": "^2.1.7",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "sass": "^1.77.8"
   }
 }
