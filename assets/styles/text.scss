@@ -1,0 +1,134 @@
+h1 {
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+h2 {
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+  @include media("<tablet") {
+    font-size: 30px;
+  }
+}
+h3 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+  @include media("<tablet") {
+    font-size: 24px;
+  }
+}
+h4 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+h5 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+h6 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+
+._d-h1 {
+  font-size: 128px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+
+._d-h2 {
+  font-size: 96px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+  @include media("<tablet") {
+    font-size: 48px;
+  }
+}
+
+._3-xl {
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+._2-xl {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+
+._xl {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+
+._lg-u {
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+
+._lg {
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  @include media("<tablet") {
+    font-size: 14px;
+  }
+}
+
+._base {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -2%;
+}
+
+._base-u {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+
+._sm {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -2%;
+}
+
+._sm-u {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}
+
+._xs {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -2%;
+}
+
+._xs-u {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+}

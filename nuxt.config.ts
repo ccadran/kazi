@@ -6,4 +6,14 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false,
   },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData:
+            '@use "@/assets/styles/common/_include-media.scss" as *;',
+        },
+      },
+    },
+  },
 });
