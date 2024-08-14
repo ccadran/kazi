@@ -18,8 +18,12 @@
 
 <style lang="scss">
 .navbar {
-  margin: 24px 30px 0;
+  position: fixed;
+  width: 100%;
+  mix-blend-mode: difference;
+  z-index: 100;
   > .navbarContent {
+    margin: 24px 30px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;

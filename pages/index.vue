@@ -8,6 +8,8 @@ categories.value = data.value;
 </script>
 
 <template>
+  <HeroHome />
+  <Test />
   <div>Ma page d'accueil</div>
   <div v-for="category in categories">
     <h1>{{ category.title }}</h1>
