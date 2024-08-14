@@ -1,3 +1,6 @@
+@import "colors";
+@import "text";
+
 @font-face {
   font-family: "GNUGrotesk";
   src: url("/fonts/GNUGROTESK-VF.TTF");
@@ -15,3 +18,7 @@ body {
   letter-spacing: -2%;
 }
 
+a {
+  color: var(--c-black);
+  font-weight: 400;
+}
