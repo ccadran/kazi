@@ -22,8 +22,8 @@ const props = defineProps({
   justify-content: space-between;
   padding: 22px 0;
   border-top: 1px solid var(--c-black);
-  border-bottom: 1px solid var(--c-black);
-  p {
+  &:last-child {
+    border-bottom: 1px solid var(--c-black);
   }
 }
 </style>

@@ -9,28 +9,11 @@ categories.value = data.value;
 
 <template>
   <main>
-    <HeroHome />
+    <HomeHero />
 
-    <div class="testQuiz">
-      <div class="inner1">
-        <p>Not so sure of the utility?</p>
-      </div>
-      <div class="innner2">
-        <p>START A TEST QUIZ RIGHT NOW</p>
-      </div>
-      <div class="testQuizChoice">
-        <UiTestQuizDifficulty difficulty="easy" />
-        <UiTestQuizDifficulty difficulty="medium" />
-        <UiTestQuizDifficulty difficulty="hard" />
-      </div>
-    </div>
-    <div>Ma page d'accueil</div>
-    <div v-for="category in categories">
-      <h1>{{ category.title }}</h1>
-      <NuxtLink :to="`/categories/${category.id}`"
-        >Voir les sous-thèmes</NuxtLink
-      >
-    </div>
+    <HomeTestQuiz />
+    <HomePopularCategories />
+
     <NuxtLink :to="'/categories'">Voir l'ensemble des catégories</NuxtLink>
   </main>
 </template>

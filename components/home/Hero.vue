@@ -19,11 +19,11 @@
   align-items: center;
   height: 100svh;
   h1 {
-    font-size: 26vw;
+    font-size: 22vw;
   }
   p {
     text-align: center;
-    width: 80%;
+    width: 60%;
   }
 }
 </style>
