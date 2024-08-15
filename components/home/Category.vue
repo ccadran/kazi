@@ -7,17 +7,19 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="category">
-    <div class="cover">
-      <img :src="category.cover" alt="" class="inner" />
+  <NuxtLink :to="'/categories/' + category.id" class="category">
+    <div class="category">
+      <div class="cover">
+        <img :src="category.cover" alt="" class="inner" />
+      </div>
+      <div class="info">
+        <p class="_2-xl">
+          {{ category.title }}
+        </p>
+        <img src="/icons/square-arrow.svg" alt="" />
+      </div>
     </div>
-    <div class="info">
-      <p class="_2-xl">
-        {{ category.title }}
-      </p>
-      <img src="/icons/square-arrow.svg" alt="" />
-    </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <style lang="scss">

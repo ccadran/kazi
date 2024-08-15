@@ -21,6 +21,7 @@ categories.value = data.value;
 <style lang="scss">
 main {
   margin: 0 60px;
+  position: relative;
 }
 .testQuiz {
   display: flex;
