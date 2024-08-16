@@ -13,6 +13,8 @@
 
 <style lang="scss">
 .hero {
+  margin: 0 60px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;

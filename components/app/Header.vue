@@ -20,7 +20,8 @@
 .navbar {
   position: fixed;
   width: 100%;
-  mix-blend-mode: difference;
+  // mix-blend-mode: difference;
+  color: var(--c-black);
   z-index: 100;
   > .navbarContent {
     margin: 24px 30px 0;

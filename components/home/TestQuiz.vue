@@ -18,6 +18,8 @@
 
 <style lang="scss">
 .testQuiz {
+  margin: 0 60px;
+
   display: flex;
   flex-direction: column;
   font-size: 48px;

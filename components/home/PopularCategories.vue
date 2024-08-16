@@ -30,7 +30,8 @@ console.log(categories.value);
 
 <style lang="scss">
 .popularCategories {
-  margin-top: 244px;
+  margin: 244px 60px 0;
+
   > .categoriesIntro {
     display: flex;
     flex-direction: column;

@@ -13,6 +13,7 @@ categories.value = data.value;
 
     <HomeTestQuiz />
     <HomePopularCategories />
+    <HomeFeatures />
 
     <NuxtLink :to="'/categories'">Voir l'ensemble des catégories</NuxtLink>
   </main>
@@ -20,7 +21,6 @@ categories.value = data.value;
 
 <style lang="scss">
 main {
-  margin: 0 60px;
   position: relative;
 }
 .testQuiz {
