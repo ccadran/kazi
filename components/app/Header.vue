@@ -1,11 +1,11 @@
 <script lang="ts" setup></script>
 
 <template>
+  <a href="/" class="logo">
+    <img src="/icons/kazi-logo.svg" alt="" height="50px" />
+  </a>
   <nav class="navbar">
     <div class="navbarContent">
-      <a href="/">
-        <img src="/icons/kazi-logo.svg" alt="" height="50px" />
-      </a>
       <div class="navbarLinks _xl">
         <a href="/categories">CATEGORIES</a>
         <a href="/quiz">QUIZ</a>
@@ -17,21 +17,34 @@
 </template>
 
 <style lang="scss">
+.logo {
+  position: fixed;
+  left: 30px;
+  margin-top: 24px;
+}
 .navbar {
   position: fixed;
-  width: 100%;
-  // mix-blend-mode: difference;
-  color: var(--c-black);
+  width: fit-content;
   z-index: 100;
+  mix-blend-mode: difference;
+  right: 30px;
   > .navbarContent {
-    margin: 24px 30px 0;
+    margin-top: calc(24px + 12px);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .logo {
+      isolation: isolate;
+    }
+
     > .navbarLinks {
       display: flex;
       gap: 20px;
       text-transform: uppercase;
+      color: inherit;
+      a {
+        color: var(--c-white);
+      }
     }
   }
 }
