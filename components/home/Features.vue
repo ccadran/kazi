@@ -9,24 +9,35 @@ const backgroundRef = ref<HTMLElement | null>(null);
 const featuresContainerRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  if (backgroundRef.value && featuresContainerRef.value) {
-    gsap.to(backgroundRef.value, {
-      scrollTrigger: {
-        trigger: featuresContainerRef.value,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1,
-        markers: true,
-      },
-      background: `radial-gradient(
+  gsap.to(backgroundRef.value, {
+    scrollTrigger: {
+      trigger: featuresContainerRef.value,
+      start: "top center",
+      end: "bottom center",
+      scrub: 1,
+      markers: true,
+    },
+    background: `radial-gradient(
         70.67% 70.67% at 50% 50%,
         rgba(250, 107, 3, 0.2) 0%,
         rgba(0, 0, 0, 0) 100%
       ), #000`,
-    });
-  } else {
-    console.error("Les références ne sont pas correctement initialisées.");
-  }
+  });
+
+  gsap.fromTo(
+    backgroundRef.value,
+    { transform: "scale(0.9) rotate(-5deg)" },
+
+    {
+      transform: "scale(1) rotate(0deg)",
+      scrollTrigger: {
+        trigger: backgroundRef.value,
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    }
+  );
 });
 </script>
 
@@ -69,7 +80,7 @@ onMounted(() => {
 <style lang="scss">
 .features {
   > .featuresIntro {
-    margin: 0 60px 342px;
+    margin: 0 60px 242px;
     display: flex;
     flex-direction: column;
     gap: 32px;
