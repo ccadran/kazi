@@ -14,6 +14,7 @@ categories.value = data.value;
     <HomeTestQuiz />
     <HomePopularCategories />
     <HomeFeatures />
+    <HomePremium />
 
     <NuxtLink :to="'/categories'">Voir l'ensemble des catégories</NuxtLink>
   </main>
