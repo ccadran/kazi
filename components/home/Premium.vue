@@ -28,6 +28,7 @@
   > .premiumContainer {
     height: 100svh;
     background-color: var(--c-black);
+    width: 100%;
   }
 }
 </style>
